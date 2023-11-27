@@ -1,4 +1,4 @@
-package fr.m2.archi.et.service.controller;
+package fr.m2.archi.et.model.JSONModel;
 
 public class JsonRequestForLeads {
 	private double lowAnnualRevenue;

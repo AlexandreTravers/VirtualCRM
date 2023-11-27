@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.m2.archi.et.model.UserLeadDto;
 import fr.m2.archi.et.model.UserModel;
 
-public class SalesforceUserService {
+public class SalesforceUserService implements UserService {
 	private static final String KEY = "3MVG9_kZcLde7U5o7jrBfZ7.55H_Wd9mdQnTiQb4y_VMnFKiZWY7OlquULuXrnnqy2Gu9tB6D_i8lUEZt_fuX";
 	private static final String SECRET_KEY = "3D56D61A346F2AD448C2CBEE7ECB256FA4473B2EE3A2DD5DEDE7782E56BB66B3";
 	private static final String DOMAIN_NAME = "https://universitangers-dev-ed.develop.my.salesforce.com";
@@ -66,7 +66,7 @@ public class SalesforceUserService {
         return accessToken;
 	}
 	
-	private JsonNode getAllUsersInformationsInJSON() {
+	private JsonNode getUsersInformationsInJSON(/*String filtre*/) {
 		String accessToken = this.getAccessToken();
         String apiUrl = DOMAIN_NAME + "/services/data/v59.0/query/?q=SELECT+FirstName,LastName,annualRevenue__c,Phone,Address,PostalCode,Country,CreatedDate,CompanyName+FROM+User";
 		
@@ -93,8 +93,9 @@ public class SalesforceUserService {
 		return jsonObject;
 	}
 	
-	public List<UserLeadDto> getUsersInformations() {
-		JsonNode jsonObject = this.getAllUsersInformationsInJSON();
+	@Override
+	public List<UserLeadDto> getUsers() {
+		JsonNode jsonObject = this.getUsersInformationsInJSON();
 		List<UserLeadDto> listInformations = new ArrayList<UserLeadDto>();
 
 		
@@ -120,5 +121,29 @@ public class SalesforceUserService {
         }
 		
 		return listInformations;
+	}
+
+	@Override
+	public List<UserLeadDto> findLeads(double lowAnnualRevenue, double highAnnualRevenue, String state) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserLeadDto> findLeadsByDate(String startDate, String enDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteLead(UserLeadDto user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addLead(UserLeadDto user) {
+		// TODO Auto-generated method stub
+		
 	}
 }

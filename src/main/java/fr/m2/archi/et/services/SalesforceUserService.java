@@ -66,7 +66,7 @@ public class SalesforceUserService implements UserService {
         return accessToken;
 	}
 	
-	private JsonNode getUsersInformationsInJSON(/*String filtre*/) {
+	private JsonNode getUsersInformationsInJSON(/*String filtre = null*/) {
 		String accessToken = this.getAccessToken();
         String apiUrl = DOMAIN_NAME + "/services/data/v59.0/query/?q=SELECT+FirstName,LastName,annualRevenue__c,Phone,Address,PostalCode,Country,CreatedDate,CompanyName+FROM+User";
 		
@@ -81,7 +81,6 @@ public class SalesforceUserService implements UserService {
                     .build();
             
             response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            //System.out.println("Réponse de la requête : " + response.body());
             
             ObjectMapper objectMapper = new ObjectMapper();
 

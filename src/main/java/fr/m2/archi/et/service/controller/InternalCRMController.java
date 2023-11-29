@@ -33,7 +33,12 @@ public class InternalCRMController {
     @PostMapping("/getLeads")
     public List<UserLeadDto> getLeads(
     		@RequestBody JsonRequestForLeads request) {
-    	return crmClient.findLeads(request.getLowAnnualRevenue(), request.getHighAnnualRevenue(), request.getState());
+    	List<UserLeadDto> leads = crmClient.findLeads(request.getLowAnnualRevenue(), request.getHighAnnualRevenue(), request.getState());
+    	System.out.println("Objets trouvés : ");
+    	for(UserLeadDto lead : leads) {
+    		System.out.println(lead.toString());
+    	}
+    	return leads;
     }
     
     @PostMapping("/getLeadsWithDate")

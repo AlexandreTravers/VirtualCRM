@@ -19,7 +19,7 @@ public /*abstract*/ class UserModel {
 	private String state;
 	
 
-	//abstract void UpdateToCRM();
+	void UpdateToCRM() {}
 	
 	@JsonCreator
 	public UserModel(@JsonProperty("firstName") String firstName,

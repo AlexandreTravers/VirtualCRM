@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserModel {
+public /*abstract*/ class UserModel {
 	private String firstName;
 	private String lastName;
 	private double annualRevenue;
@@ -17,6 +17,9 @@ public class UserModel {
 	private String creationDate;
 	private String company;
 	private String state;
+	
+
+	//abstract void UpdateToCRM();
 	
 	@JsonCreator
 	public UserModel(@JsonProperty("firstName") String firstName,

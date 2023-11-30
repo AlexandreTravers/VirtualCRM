@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.m2.archi.et.client.CRMSalesforceClient;
 import fr.m2.archi.et.model.UserLeadDto;
+import fr.m2.archi.et.model.JSONModel.JsonRequestForLeads;
+import fr.m2.archi.et.model.JSONModel.JsonRequestForLeadsWithDate;
 import fr.m2.archi.et.client.CRMClient;
 
 @RestController
@@ -23,6 +25,12 @@ public class SalesforceCRMController {
     		@RequestBody JsonRequestForLeads request) {
     	return crmClient.findLeads(request.getLowAnnualRevenue(), request.getHighAnnualRevenue(), request.getState());
     }
+	
+	@PostMapping("/getLeadsByDate")
+	public List<UserLeadDto> getLeadsByDate(
+			@RequestBody JsonRequestForLeadsWithDate request) {
+		return crmClient.findLeadsByDate(request.getStartDate(), request.getEndDate());
+	}
 	
 	@GetMapping("/allUsers")
     public List<UserLeadDto> getUsers() {

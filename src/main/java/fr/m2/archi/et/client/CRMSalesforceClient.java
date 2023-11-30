@@ -10,31 +10,28 @@ public class CRMSalesforceClient implements CRMClient {
 
 	@Override
 	public List<UserLeadDto> findLeads(double lowAnnualRevenue, double highAnnualRevenue, String state) {
-		// TODO
-		return null;
+		return SalesforceUserService.getInstance().findLeads(lowAnnualRevenue, highAnnualRevenue, state);
 	}
 
 	@Override
 	public List<UserLeadDto> findLeadsByDate(String startDate, String enDate) {
-		// TODO Auto-generated method stub
-		return null;
+		return SalesforceUserService.getInstance().findLeadsByDate(startDate, enDate);
 	}
 
 	@Override
 	public void deleteLead(UserLeadDto user) {
-		// TODO Auto-generated method stub
-		
+		SalesforceUserService.getInstance().deleteLead(user);
 	}
 
 	@Override
 	public void addLead(UserLeadDto user) {
-		// TODO Auto-generated method stub
+		SalesforceUserService.getInstance().addLead(user);
 		
 	}
 	
 	@Override
 	public List<UserLeadDto> getUsers() {
-		return SalesforceUserService.getInstance().getUsersInformations();
+		return SalesforceUserService.getInstance().getUsers();
 	}
 
 }

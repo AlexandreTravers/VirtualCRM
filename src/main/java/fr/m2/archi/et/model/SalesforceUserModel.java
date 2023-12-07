@@ -1,6 +1,6 @@
 package fr.m2.archi.et.model;
 
-public class UserModel {
+public class SalesforceUserModel {
 	private String firstName;
 	private String lastName;
 	private double annualRevenue;
@@ -12,18 +12,9 @@ public class UserModel {
 	private String creationDate;
 	private String company;
 	private String state;
-		
-	public UserModel(String firstName,
-					 String lastName,
-					 double annualRevenue,
-					 String phone,
-					 String street,
-					 String postalCode,
-					 String city,
-					 String country,
-					 String creationDate,
-					 String company,
-					 String state) {
+
+	public SalesforceUserModel(String firstName, String lastName, double annualRevenue, String phone, String street,
+			String postalCode, String city, String country, String creationDate, String company, String state) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.annualRevenue = annualRevenue;
@@ -36,69 +27,95 @@ public class UserModel {
 		this.company = company;
 		this.state = state;
 	}
-	
-	@Override
-	public String toString() {
-		return firstName + " - " + lastName + " - " + annualRevenue + " - " + phone + " - " + street + " - " + postalCode + " - " + city + " - " + country + " - " + creationDate + " - " + company + " - " + state; 
-	}
 
 	public String getFirstName() {
 		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
 		return lastName;
 	}
 
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	public double getAnnualRevenue() {
 		return annualRevenue;
+	}
+
+	public void setAnnualRevenue(double annualRevenue) {
+		this.annualRevenue = annualRevenue;
 	}
 
 	public String getPhone() {
 		return phone;
 	}
 
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public String getStreet() {
 		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
 	public String getPostalCode() {
 		return postalCode;
 	}
-	
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
 	public String getCity() {
 		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public String getCountry() {
 		return country;
 	}
 
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	public String getCreationDate() {
 		return creationDate;
+	}
+
+	public void setCreationDate(String creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	public String getCompany() {
 		return company;
 	}
 
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
 	public String getState() {
 		return state;
 	}
-	
-	public boolean isEqual(UserModel userModel) {
-		if(this.firstName.equals(userModel.firstName)
-		   && this.lastName.equals(userModel.lastName)
-		   && this.annualRevenue == userModel.annualRevenue
-		   && this.phone.equals(userModel.phone)
-		   && this.street.equals(userModel.street)
-		   && this.postalCode.equals(userModel.postalCode)
-		   && this.city.equals(userModel.city)
-		   && this.country.equals(userModel.country)
-		   && this.creationDate.equals(userModel.creationDate)
-		   && this.company.equals(userModel.company)
-		   && this.state.equals(userModel.state)
-		   ) return true;
-		return false;
+
+	public void setState(String state) {
+		this.state = state;
 	}
+
+	
+	
 }

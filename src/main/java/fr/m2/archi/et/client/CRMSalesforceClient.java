@@ -3,7 +3,7 @@ package fr.m2.archi.et.client;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.m2.archi.et.model.UserLeadDto;
+import fr.m2.archi.et.dto.UserLeadDto;
 import fr.m2.archi.et.services.SalesforceUserService;
 
 public class CRMSalesforceClient implements CRMClient {

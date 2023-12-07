@@ -8,35 +8,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.m2.archi.et.client.CRMSalesforceClient;
-import fr.m2.archi.et.dto.UserLeadDto;
+import fr.m2.archi.et.client.VirtualCRMClient;
+import fr.m2.archi.et.dto.VirtualLeadDto;
 import fr.m2.archi.et.model.JSONModel.JsonRequestForLeads;
 import fr.m2.archi.et.model.JSONModel.JsonRequestForLeadsWithDate;
-import fr.m2.archi.et.client.CRMClient;
-
-//TODO
-//A supprimer pour la version final
 
 @RestController
-@RequestMapping("/api/salesforce")
-public class SalesforceCRMController {
-
-	CRMClient crmClient = new CRMSalesforceClient();
+@RequestMapping("/api")
+public class VirtualCRMController {
+	VirtualCRMClient crmClient = new VirtualCRMClient();
+	
+	@GetMapping("/allUsers")
+    public List<VirtualLeadDto> getUsers() {
+    	return crmClient.getUsers();
+    }
 	
 	@PostMapping("/getLeads")
-    public List<UserLeadDto> getLeads(
+    public List<VirtualLeadDto> getLeads(
     		@RequestBody JsonRequestForLeads request) {
     	return crmClient.findLeads(request.getLowAnnualRevenue(), request.getHighAnnualRevenue(), request.getState());
     }
 	
 	@PostMapping("/getLeadsByDate")
-	public List<UserLeadDto> getLeadsByDate(
+	public List<VirtualLeadDto> getLeadsByDate(
 			@RequestBody JsonRequestForLeadsWithDate request) {
 		return crmClient.findLeadsByDate(request.getStartDate(), request.getEndDate());
 	}
-	
-	@GetMapping("/allUsers")
-    public List<UserLeadDto> getUsers() {
-    	return crmClient.getUsers();
-    }
 }

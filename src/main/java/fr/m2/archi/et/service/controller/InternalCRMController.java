@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.m2.archi.et.client.CRMClient;
 import fr.m2.archi.et.client.CRMInternalClient;
-import fr.m2.archi.et.model.UserLeadDto;
+import fr.m2.archi.et.dto.UserLeadDto;
 import fr.m2.archi.et.model.JSONModel.JsonRequestForLeads;
 import fr.m2.archi.et.model.JSONModel.JsonRequestForLeadsWithDate;
+
+//TODO
+//A supprimer pour la version finale
 
 @RestController
 @RequestMapping("/api/internal")

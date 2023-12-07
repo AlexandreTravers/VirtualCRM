@@ -1,19 +1,18 @@
-package fr.m2.archi.et.model;
+package fr.m2.archi.et.dto;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import fr.m2.archi.et.model.InternalUserModel;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserLeadDto {
-	UserModel informations;
+public class InternalUserLeadDto {
+	private InternalUserModel informations;
 	
-	@JsonCreator
-	public UserLeadDto(@JsonProperty("informations") UserModel informations) {
+	public InternalUserLeadDto(InternalUserModel informations) {
 		this.informations = informations;
 	}
 	
-	public UserModel getInformations() {
+	public InternalUserModel getInformations() {
 		return this.informations;
 	}
 	
@@ -22,7 +21,9 @@ public class UserLeadDto {
 		return this.informations.toString();
 	}
 	
+	/*
 	public boolean isEqual(UserLeadDto userLeadDto) {
 		return this.informations.isEqual(userLeadDto.informations);
 	}
+	*/
 }

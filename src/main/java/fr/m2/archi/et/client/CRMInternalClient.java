@@ -2,7 +2,7 @@ package fr.m2.archi.et.client;
 
 import java.util.List;
 
-import fr.m2.archi.et.model.UserLeadDto;
+import fr.m2.archi.et.dto.UserLeadDto;
 import fr.m2.archi.et.services.InternalUserService;
 
 public class CRMInternalClient implements CRMClient {

@@ -7,7 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserLeadDto {
 	UserModel informations;
-	
+
+
 	@JsonCreator
 	public UserLeadDto(@JsonProperty("informations") UserModel informations) {
 		this.informations = informations;

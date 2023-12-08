@@ -33,43 +33,64 @@ public class SalesforceUserFinds {
 		}
 		return instance;
 	}
-	
-	public List<SalesforceUserLeadDto> getUsers() {
-		JsonNode jsonObject = this.getUsersInformationsInJSON();
-		List<SalesforceUserLeadDto> listInformations = new ArrayList<SalesforceUserLeadDto>();
 
-		if (jsonObject.has("records") && jsonObject.get("records").isArray()) {
-		    JsonNode records = jsonObject.get("records");
-            for (JsonNode record : records) {
-                String firstName = record.get("FirstName").asText();
-                String lastName = record.get("LastName").asText();
-                double annualRevenue = record.get("annualRevenue__c").asDouble();
-                String phone = record.get("Phone").asText();
+	public List<SalesforceUserLeadDto> getUserLeadDtoWithJSON(JsonNode jsonObject)
+	{
+		try {
+			List<SalesforceUserLeadDto> listDto = new ArrayList<SalesforceUserLeadDto>();
 
-                JsonNode address = record.get("Address");
-                String street = address.get("street").asText();
-                String postalCode = address.get("postalCode").asText();
-                String city = address.get("city").asText();
-                String country = address.get("country").asText();
-                String state = address.get("state").asText();
+			if (jsonObject.has("records") && jsonObject.get("records").isArray()) {
+				JsonNode records = jsonObject.get("records");
+				for (JsonNode record : records) {
+					String firstName = record.get("FirstName").asText();
+					String lastName = record.get("LastName").asText();
+					double annualRevenue = record.get("annualRevenue__c").asDouble();
+					String phone = record.get("Phone").asText();
 
-                String creationDate = record.get("CreatedDate").asText();
-                String company = record.get("CompanyName").asText();
-                listInformations.add(new SalesforceUserLeadDto(new SalesforceUserModel(firstName, lastName, annualRevenue, phone, street, postalCode, city, country, creationDate, company, state)));
-            }
-        }
-		
-		return listInformations;
+					JsonNode address = record.get("Address");
+					String street = address.get("street").asText();
+					String postalCode = address.get("postalCode").asText();
+					String city = address.get("city").asText();
+					String country = address.get("country").asText();
+					String state = address.get("state").asText();
+
+					String creationDate = record.get("CreatedDate").asText();
+					String company = record.get("CompanyName").asText();
+					listDto.add(new SalesforceUserLeadDto(new SalesforceUserModel(firstName, lastName, annualRevenue, phone, street, postalCode, city, country, creationDate, company, state)));
+				}
+			}
+			return listDto;
+		}
+		catch(NullPointerException e)
+		{
+			//e.printStackTrace();
+			System.out.println("=================\n\njsonObject null !\n\n=================");
+			return new ArrayList<SalesforceUserLeadDto>();
+		}
 	}
-	
-	public List<SalesforceUserLeadDto> findLeads(double lowAnnualRevenue, double highAnnualRevenue, String state) {
-		//TODO
-		return null;
+
+
+	public List<SalesforceUserLeadDto> getUsers() {
+		JsonNode jsonObject = this.getUsersInformationsInJSON("");
+		return getUserLeadDtoWithJSON(jsonObject);
+	}
+
+	public List<SalesforceUserLeadDto> findLeads(double lowAnnualRevenue, double highAnnualRevenue, String state)
+	{
+		String plusState = state.replace(" ", "+");
+		String newState = "'" + plusState + "'";
+		String filtre = "+WHERE+annualRevenue__c+&ge+" + lowAnnualRevenue
+				+ "+AND+annualRevenue__c+&le+" + highAnnualRevenue
+				+ "+AND+state+=+" + newState;
+		JsonNode jsonObject = this.getUsersInformationsInJSON(filtre);
+		return getUserLeadDtoWithJSON(jsonObject);
 	}
 	
 	public List<SalesforceUserLeadDto> findLeadsByDate(String startDate, String endDate) {
-		//TODO
-		return null;
+		String filtre = "+WHERE+CreatedDate+&ge+" + startDate
+				+ "+AND+CreatedDate+&le+" + endDate;
+		JsonNode jsonObject = this.getUsersInformationsInJSON(filtre);
+		return getUserLeadDtoWithJSON(jsonObject);
 	}
 	
 	private String getAccessToken() {
@@ -104,10 +125,10 @@ public class SalesforceUserFinds {
         return accessToken;
 	}
 	
-	private JsonNode getUsersInformationsInJSON(/*String filtre = null*/) {
+	private JsonNode getUsersInformationsInJSON(String filtre) {
 		//TODO Faire le filtre
 		String accessToken = this.getAccessToken();
-        String apiUrl = DOMAIN_NAME + "/services/data/v59.0/query/?q=SELECT+FirstName,LastName,annualRevenue__c,Phone,Address,PostalCode,Country,CreatedDate,CompanyName+FROM+User";
+        String apiUrl = DOMAIN_NAME + "/services/data/v59.0/query/?q=SELECT+FirstName,LastName,annualRevenue__c,Phone,Address,PostalCode,Country,CreatedDate,CompanyName+FROM+User" + filtre;
 		
         HttpClient client = HttpClient.newHttpClient();
         HttpResponse<String> response;

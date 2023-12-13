@@ -6,11 +6,13 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import fr.m2.archi.et.dto.SalesforceUserLeadDto;
 import fr.m2.archi.et.model.SalesforceUserModel;
 
@@ -77,12 +79,27 @@ public class SalesforceUserFinds {
 
 	public List<SalesforceUserLeadDto> findLeads(double lowAnnualRevenue, double highAnnualRevenue, String state)
 	{
-		String plusState = state.replace(" ", "+");
-		String newState = "'" + plusState + "'";
-		String filtre = "+WHERE+annualRevenue__c+&ge+" + lowAnnualRevenue
-				+ "+AND+annualRevenue__c+&le+" + highAnnualRevenue
-				+ "+AND+state+=+" + newState;
+		String newState = state.replace(" ", "+");
+		String filtre = "+WHERE+annualRevenue__c+%3E+" + lowAnnualRevenue
+				+ "+AND+annualRevenue__c+%3C+" + highAnnualRevenue;
+
 		JsonNode jsonObject = this.getUsersInformationsInJSON(filtre);
+
+
+		if (jsonObject.has("records") && jsonObject.get("records").isArray()) {
+			Iterator<JsonNode> nodes = jsonObject.get("records").elements();
+			while(nodes.hasNext()) {
+				String nodeState = nodes.next().get("Address").get("state").asText();
+				if(nodeState.equals(newState)){
+					System.out.println("\n\n\nLA CHANCE\n\n\n");
+				}
+				else
+				{
+					nodes.remove();
+				}
+			}
+		}
+
 		return getUserLeadDtoWithJSON(jsonObject);
 	}
 	
@@ -133,17 +150,17 @@ public class SalesforceUserFinds {
         HttpClient client = HttpClient.newHttpClient();
         HttpResponse<String> response;
         JsonNode jsonObject = null;
-		try {
-			HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(apiUrl))
-                    .header("Authorization", "Bearer " + accessToken)
-                    .GET()
-                    .build();
-            
-            response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            
-            ObjectMapper objectMapper = new ObjectMapper();
 
+		try
+		{
+			HttpRequest request = HttpRequest.newBuilder()
+						.uri(URI.create(apiUrl))
+						.header("Authorization", "Bearer " + accessToken)
+						.GET()
+						.build();
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+			ObjectMapper objectMapper = new ObjectMapper();
             jsonObject = objectMapper.readValue(response.body(), JsonNode.class);
 		} catch (Exception e) {
 			e.printStackTrace();

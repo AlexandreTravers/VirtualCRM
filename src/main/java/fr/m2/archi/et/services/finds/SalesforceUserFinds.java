@@ -91,7 +91,7 @@ public class SalesforceUserFinds {
 			while(nodes.hasNext()) {
 				String nodeState = nodes.next().get("Address").get("state").asText();
 				if(nodeState.equals(newState)){
-					System.out.println("\n\n\nLA CHANCE\n\n\n");
+					System.out.println("\nLA CHANCE\n");
 				}
 				else
 				{
@@ -104,8 +104,12 @@ public class SalesforceUserFinds {
 	}
 	
 	public List<SalesforceUserLeadDto> findLeadsByDate(String startDate, String endDate) {
-		String filtre = "+WHERE+CreatedDate+&ge+" + startDate
-				+ "+AND+CreatedDate+&le+" + endDate;
+		String newStartDate = startDate.replace("+", "%2b");
+		String newEndDate = endDate.replace("+", "%2b");
+
+
+		String filtre = "+WHERE+CreatedDate+%3E+" + newStartDate
+				+ "+AND+CreatedDate+%3C+" + newEndDate;
 		JsonNode jsonObject = this.getUsersInformationsInJSON(filtre);
 		return getUserLeadDtoWithJSON(jsonObject);
 	}

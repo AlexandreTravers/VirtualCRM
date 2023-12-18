@@ -16,7 +16,7 @@ public class VirtualConverter {
 		String country = user.getInformations().getCountry();
 		String creationDate = user.getInformations().getCreationDate();
 		String company = user.getInformations().getCompany();
-		String state = user.getInformations().getCompany();
+		String state = user.getInformations().getState();
 		
 		return new VirtualLeadDto(firstName, lastName, annualRevenue, phone, street, postalCode, city, country, creationDate, company, state);
 	}

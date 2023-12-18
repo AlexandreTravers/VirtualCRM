@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import fr.m2.archi.et.model.InternalUserModel;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class InternalUserLeadDto {
 	private InternalUserModel informations;
 	

@@ -12,7 +12,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fr.m2.archi.et.dto.InternalUserLeadDto;
+import fr.m2.archi.et.dto.SalesforceUserLeadDto;
 import fr.m2.archi.et.model.InternalUserModel;
+import fr.m2.archi.et.model.SalesforceUserModel;
 
 public class InternalUserFinds {
 	private static InternalUserFinds instance;
@@ -75,10 +77,25 @@ public class InternalUserFinds {
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(response);
-
         for (JsonNode node : jsonNode) {
-            InternalUserLeadDto userLeadDto = objectMapper.treeToValue(node, InternalUserLeadDto.class);
-            userLeadDtos.add(userLeadDto);
+
+			//InternalUserLeadDto userLeadDto = objectMapper.treeToValue(node, InternalUserLeadDto.class);
+			JsonNode record = node.get("informations");
+
+
+			String firstName = record.get("name").asText();
+			double annualRevenue = record.get("annualRevenue").asDouble();
+			String phone = record.get("phone").asText();
+
+			String street = record.get("street").asText();
+			String postalCode = record.get("postalCode").asText();
+			String city = record.get("city").asText();
+			String country = record.get("country").asText();
+			String state = record.get("state").asText();
+
+			String creationDate = record.get("creationDate").asText();
+			String company = record.get("company").asText();
+			userLeadDtos.add(new InternalUserLeadDto(new InternalUserModel(firstName, annualRevenue, phone, street, postalCode, city, country, creationDate, company, state)));
         }
 
         return userLeadDtos;

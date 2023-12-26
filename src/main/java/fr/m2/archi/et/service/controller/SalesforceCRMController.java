@@ -14,9 +14,6 @@ import fr.m2.archi.et.model.JSONModel.JsonRequestForLeads;
 import fr.m2.archi.et.model.JSONModel.JsonRequestForLeadsWithDate;
 import fr.m2.archi.et.client.CRMClient;
 
-//TODO
-//A supprimer pour la version final
-
 @RestController
 @RequestMapping("/api/salesforce")
 public class SalesforceCRMController {

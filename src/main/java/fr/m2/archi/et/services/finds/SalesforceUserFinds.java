@@ -147,7 +147,6 @@ public class SalesforceUserFinds {
 	}
 	
 	private JsonNode getUsersInformationsInJSON(String filtre) {
-		//TODO Faire le filtre
 		String accessToken = this.getAccessToken();
         String apiUrl = DOMAIN_NAME + "/services/data/v59.0/query/?q=SELECT+FirstName,LastName,annualRevenue__c,Phone,Address,PostalCode,Country,CreatedDate,CompanyName+FROM+User" + filtre;
 		

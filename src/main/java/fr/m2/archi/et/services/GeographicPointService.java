@@ -37,9 +37,24 @@ public class GeographicPointService {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(response.body());
 
-            String latitude = jsonNode.get(0).get("lat").asText();
-            String longitude = jsonNode.get(0).get("lon").asText();
-            
+            String latitude;
+            try {
+                latitude = jsonNode.get(0).get("lat").asText();
+            }
+            catch(Exception e)
+            {
+                latitude = "Unkown";
+            }
+
+            String longitude;
+            try {
+                longitude = jsonNode.get(0).get("lon").asText();
+            }
+            catch(Exception e)
+            {
+                longitude = "Unkown";
+            }
+
             resultNode = objectMapper.createObjectNode();
 
             resultNode.put("latitude", latitude);

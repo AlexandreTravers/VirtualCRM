@@ -68,8 +68,35 @@ public class InternalUserFinds {
 	}
 	
 	public List<InternalUserLeadDto> findLeadsByDate(String startDate, String endDate) {
-		//TODO
-		return null;
+		List<InternalUserLeadDto> usersByDate = new ArrayList<InternalUserLeadDto>();
+
+		String requestUrl = API_URL + "/getLeadsByDate";
+		String requestBody = "{ \"startDate\":\"" + startDate + "\", \"endDate\":\"" + endDate + "\"}";
+
+		HttpClient client = HttpClient.newHttpClient();
+		HttpResponse<String> response = null;
+		//JsonNode jsonObject = null;
+		try {
+			HttpRequest request = HttpRequest.newBuilder()
+					.uri(URI.create(requestUrl))
+					.header("Content-Type", "application/json")
+					.POST(HttpRequest.BodyPublishers.ofString(requestBody))
+					.build();
+
+			response = client.send(request, HttpResponse.BodyHandlers.ofString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if(response != null) {
+			try {
+				usersByDate = jsonToLead(response.body());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return usersByDate;
 	}
 	
 	private List<InternalUserLeadDto> jsonToLead(String response) throws JsonProcessingException, IllegalArgumentException {

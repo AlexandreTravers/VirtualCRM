@@ -54,8 +54,8 @@ public class SalesforceUserService implements UserService {
 	}
 
 	@Override
-	public void deleteLead(UserLeadDto user) {
-		salesforceUserModify.deleteUser(user.getInformations().getPhone());
+	public void deleteLead(String phoneNumber) {
+		salesforceUserModify.deleteUser(phoneNumber);
 	}
 
 	@Override

@@ -53,8 +53,8 @@ public class InternalUserService implements UserService {
 	}
 
 	@Override
-	public void deleteLead(UserLeadDto user) {
-		internalUserModify.deleteUser(user.getInformations().getPhone());
+	public void deleteLead(String phoneNumber) {
+		internalUserModify.deleteUser(phoneNumber);
 	}
 
 	@Override

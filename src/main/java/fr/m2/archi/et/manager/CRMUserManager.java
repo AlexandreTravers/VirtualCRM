@@ -47,9 +47,9 @@ public class CRMUserManager {
 		return userList;
 	}
 
-	public void deleteLead(UserLeadDto user) {
-		internalUserService.deleteLead(user);
-		salesforceUserService.deleteLead(user);
+	public void deleteLead(String phoneNumber) {
+		internalUserService.deleteLead(phoneNumber);
+		salesforceUserService.deleteLead(phoneNumber);
 	}
 
 	public void addLead(UserLeadDto user) {

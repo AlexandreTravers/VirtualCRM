@@ -23,8 +23,8 @@ public class CRMInternalClient implements CRMClient {
 	}
 
 	@Override
-	public void deleteLead(UserLeadDto user) {
-		InternalUserService.getInstance().deleteLead(user);
+	public void deleteLead(String phoneNumber) {
+		InternalUserService.getInstance().deleteLead(phoneNumber);
 	}
 
 	@Override

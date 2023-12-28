@@ -8,6 +8,6 @@ public interface UserService {
 	public List<UserLeadDto> getUsers();
 	public List<UserLeadDto> findLeads(double lowAnnualRevenue, double highAnnualRevenue, String state);
 	public List<UserLeadDto> findLeadsByDate(String startDate, String enDate);
-	public void deleteLead(UserLeadDto user);
+	public void deleteLead(String phoneNumber);
 	public void addLead(UserLeadDto user);
 }

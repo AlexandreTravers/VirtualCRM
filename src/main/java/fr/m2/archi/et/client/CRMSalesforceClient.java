@@ -19,8 +19,8 @@ public class CRMSalesforceClient implements CRMClient {
 	}
 
 	@Override
-	public void deleteLead(UserLeadDto user) {
-		SalesforceUserService.getInstance().deleteLead(user);
+	public void deleteLead(String phoneNumber) {
+		SalesforceUserService.getInstance().deleteLead(phoneNumber);
 	}
 
 	@Override

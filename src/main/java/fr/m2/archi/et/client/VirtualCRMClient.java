@@ -19,8 +19,8 @@ public class VirtualCRMClient{
 		return VirtualCRMService.getInstance().findLeadsByDate(startDate, enDate);
 	}
 
-	public void deleteLead(VirtualLeadDto user) {
-		VirtualCRMService.getInstance().deleteLead(user);
+	public void deleteLead(String phoneNumber) {
+		VirtualCRMService.getInstance().deleteLead(phoneNumber);
 		
 	}
 

@@ -48,8 +48,8 @@ public class VirtualCRMService {
 		return userList;
 	}
 
-	public void deleteLead(VirtualLeadDto user) {
-		crmUserManager.deleteLead(VirtualConverter.convert(user));
+	public void deleteLead(String phoneNumber) {
+		crmUserManager.deleteLead(phoneNumber);
 	}
 
 	public void addLead(VirtualLeadDto user) {

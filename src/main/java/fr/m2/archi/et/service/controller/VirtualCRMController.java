@@ -2,6 +2,7 @@ package fr.m2.archi.et.service.controller;
 
 import java.util.List;
 
+import fr.m2.archi.et.dto.UserLeadDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,5 +34,12 @@ public class VirtualCRMController {
 	public List<VirtualLeadDto> getLeadsByDate(
 			@RequestBody JsonRequestForLeadsWithDate request) {
 		return crmClient.findLeadsByDate(request.getStartDate(), request.getEndDate());
+	}
+
+
+	@PostMapping("/addLead")
+	public void addLead(
+			@RequestBody VirtualLeadDto request) {
+		crmClient.addLead(request);
 	}
 }

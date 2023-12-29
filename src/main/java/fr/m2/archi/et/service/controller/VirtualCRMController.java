@@ -59,4 +59,9 @@ public class VirtualCRMController {
 			@RequestBody JsonRequestForRemove request) {
 		crmClient.deleteLead(request.getPhoneNumber());
 	}
+	
+	@GetMapping("merge")
+	public void merge() {
+		crmClient.merge();
+	}
 }

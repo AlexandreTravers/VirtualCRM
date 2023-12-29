@@ -5,11 +5,13 @@ import java.util.List;
 
 import fr.m2.archi.et.dto.UserLeadDto;
 import fr.m2.archi.et.services.InternalUserService;
+import fr.m2.archi.et.services.LeadMergerService;
 import fr.m2.archi.et.services.SalesforceUserService;
 
 public class CRMUserManager {
 	private InternalUserService internalUserService;
 	private SalesforceUserService salesforceUserService;
+	private LeadMergerService leadMergerService;
 	
 	private static CRMUserManager instance;
 	
@@ -23,6 +25,7 @@ public class CRMUserManager {
 	private CRMUserManager() {
 		internalUserService = InternalUserService.getInstance();
 		salesforceUserService = SalesforceUserService.getInstance();
+		leadMergerService = LeadMergerService.getInstance();
 	}
 	
 	
@@ -55,5 +58,9 @@ public class CRMUserManager {
 	public void addLead(UserLeadDto user) {
 		internalUserService.addLead(user);
 		salesforceUserService.addLead(user);
+	}
+	
+	public void merge() {
+		leadMergerService.merge(salesforceUserService.getUsers());
 	}
 }

@@ -27,5 +27,9 @@ public class VirtualCRMClient{
 	public void addLead(VirtualLeadDto user) {
 		VirtualCRMService.getInstance().addLead(user);
 	}
+	
+	public void merge() {
+		VirtualCRMService.getInstance().merge();
+	}
 
 }

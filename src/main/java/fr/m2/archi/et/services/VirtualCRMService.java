@@ -55,4 +55,8 @@ public class VirtualCRMService {
 	public void addLead(VirtualLeadDto user) {
 		crmUserManager.addLead(VirtualConverter.convert(user));
 	}
+	
+	public void merge() {
+		crmUserManager.merge();
+	}
 }

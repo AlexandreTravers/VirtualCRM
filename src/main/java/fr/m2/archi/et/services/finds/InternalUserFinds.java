@@ -31,9 +31,31 @@ public class InternalUserFinds {
 	}
 	
 	public List<InternalUserLeadDto> getUsers() {
-		List<InternalUserLeadDto> test = new ArrayList<InternalUserLeadDto>();
-		test.add(new InternalUserLeadDto(new InternalUserModel("Test, Test", 0, "060606", "boulevard Lavoisier", "49100", "Angers", "France", "18-12-2020", "Univ", "Maine-et-Loire")));
-		return test;
+		String requestUrl = API_URL + "/allUsers";
+		
+		HttpClient client = HttpClient.newHttpClient();
+        HttpResponse<String> response = null;
+		try {
+			HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(requestUrl))
+                    .GET()
+                    .build();
+            
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		List<InternalUserLeadDto> lists = new ArrayList<>();
+		if(response != null) {
+			try {
+				lists = jsonToLead(response.body());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return lists;
 	}
 	
 	public List<InternalUserLeadDto> findLeads(double lowAnnualRevenue, double highAnnualRevenue, String state) {

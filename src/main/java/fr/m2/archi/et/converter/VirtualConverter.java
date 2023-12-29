@@ -32,7 +32,7 @@ public class VirtualConverter {
 		String country = user.getCountry();
 		String creationDate = user.getCreationDate();
 		String company = user.getCompany();
-		String state = user.getCompany();
+		String state = user.getState();
 		
 		return new UserLeadDto(new UserModel(firstName, lastName, annualRevenue, phone, street, postalCode, city, country, creationDate, company, state));
 	}

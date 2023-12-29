@@ -60,6 +60,6 @@ public class SalesforceUserService implements UserService {
 
 	@Override
 	public void addLead(UserLeadDto user) {
-		salesforceUserModify.addUser(user.getInformations().getPhone());
+		salesforceUserModify.addUser(user.getInformations());
 	}
 }

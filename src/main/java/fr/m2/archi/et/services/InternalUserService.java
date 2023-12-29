@@ -59,7 +59,7 @@ public class InternalUserService implements UserService {
 
 	@Override
 	public void addLead(UserLeadDto user) {
-		internalUserModify.addUser(user.getInformations().getPhone());
+		internalUserModify.addUser(new InternalUserLeadDto(Converter.convert(user.getInformations())));
 	}
 
 }

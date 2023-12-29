@@ -37,4 +37,19 @@ public class Converter {
 		
 		return new UserModel(firstName, lastName, annualRevenue, phone, street, postalCode, city, country, creationDate, company, state);
 	}
+	
+	public static InternalUserModel convert(UserModel userModel) {
+		String name = userModel.getFirstName() + ", " + userModel.getLastName();
+		double annualRevenue = userModel.getAnnualRevenue();
+		String phone = userModel.getPhone();
+		String street = userModel.getStreet();
+		String postalCode = userModel.getPostalCode();
+		String city = userModel.getCity();
+		String country = userModel.getCountry();
+		String creationDate = userModel.getCreationDate();
+		String company = userModel.getCompany();
+		String state = userModel.getState();
+		
+		return new InternalUserModel(name, annualRevenue, phone, street, postalCode, city, country, creationDate, company, state);
+	}
 }

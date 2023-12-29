@@ -44,15 +44,6 @@ public class SalesforceUserModify {
 
 		String mail = um.getFirstName()+"."+um.getLastName()+"@testmail.com";
 
-		JsonNode userAddress = objectMapper.createObjectNode()
-				.put("street", um.getStreet())
-				.put("postalCode", um.getPostalCode())
-				.put("city", um.getCity())
-				.put("country", um.getCountry())
-				.put("state", um.getState());
-
-
-
 		JsonNode userData = objectMapper.createObjectNode()
 				.put("Username", mail)
 				.put("Email", mail)
@@ -66,7 +57,7 @@ public class SalesforceUserModify {
 				.put("LastName", um.getLastName())
 				.put("annualRevenue__c", um.getAnnualRevenue())
 				.put("Phone", um.getPhone())
-				.put("Firstname", um.getCompany())
+				.put("CompanyName", um.getCompany())
 				.put("street", um.getStreet())
 				.put("postalCode", um.getPostalCode())
 				.put("city", um.getCity())

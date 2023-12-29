@@ -90,11 +90,7 @@ public class SalesforceUserFinds {
 			Iterator<JsonNode> nodes = jsonObject.get("records").elements();
 			while(nodes.hasNext()) {
 				String nodeState = nodes.next().get("Address").get("state").asText();
-				if(nodeState.equals(newState)){
-					System.out.println("\nLA CHANCE\n");
-				}
-				else
-				{
+				if(!nodeState.equals(newState)){
 					nodes.remove();
 				}
 			}
@@ -148,7 +144,7 @@ public class SalesforceUserFinds {
 	
 	private JsonNode getUsersInformationsInJSON(String filtre) {
 		String accessToken = this.getAccessToken();
-        String apiUrl = DOMAIN_NAME + "/services/data/v59.0/query/?q=SELECT+FirstName,LastName,annualRevenue__c,Phone,Address,PostalCode,Country,CreatedDate,CompanyName+FROM+User" + filtre;
+        String apiUrl = DOMAIN_NAME + "/services/data/v59.0/query/?q=SELECT+FirstName,LastName,annualRevenue__c,Phone,Address,PostalCode,Country,CreatedDate,CompanyName,ProfileId+FROM+User" + filtre;
 		
         HttpClient client = HttpClient.newHttpClient();
         HttpResponse<String> response;

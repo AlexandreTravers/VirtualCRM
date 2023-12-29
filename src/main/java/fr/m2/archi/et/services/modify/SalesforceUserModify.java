@@ -142,7 +142,31 @@ public class SalesforceUserModify {
 	}
 
 	public void deleteUser(String phoneNumber) {
-		//TODO
+		String accessToken = this.getAccessToken();
+		String apiUrl = DOMAIN_NAME + "/services/data/v59.0/users/delete";
+
+		HttpClient client = HttpClient.newHttpClient();
+		HttpResponse<String> response;
+
+		String requestBody = "identityAttribute:emailAddress\nloulou.testleadd@testmail.com";
+
+
+		try {
+			HttpRequest request = HttpRequest.newBuilder()
+					.uri(URI.create(apiUrl))
+					.header("Content-Type", "multipart/form-data")
+					.header("Authorization", "Bearer " + accessToken)
+					.POST(HttpRequest.BodyPublishers.ofString(requestBody))
+					.build();
+			response = client.send(request, HttpResponse.BodyHandlers.ofString());
+			ObjectMapper objectMapper = new ObjectMapper();
+			JsonNode jsonNode = objectMapper.readTree(response.body());
+			int i = 0;
+		}
+		catch(Exception e)
+		{
+
+		}
 	}
 
 	private String getAccessToken() {

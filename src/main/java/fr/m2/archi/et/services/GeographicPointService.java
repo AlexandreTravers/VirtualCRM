@@ -43,7 +43,7 @@ public class GeographicPointService {
             }
             catch(Exception e)
             {
-                latitude = "Unkown";
+                latitude = "Unknown";
             }
 
             String longitude;
@@ -52,7 +52,7 @@ public class GeographicPointService {
             }
             catch(Exception e)
             {
-                longitude = "Unkown";
+                longitude = "Unknown";
             }
 
             resultNode = objectMapper.createObjectNode();
